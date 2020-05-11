@@ -19,6 +19,7 @@ import com.jagrosh.jdautilities.command.CommandEvent;
 import com.jagrosh.jmusicbot.Bot;
 import com.jagrosh.jmusicbot.commands.AdminCommand;
 import com.jagrosh.jmusicbot.settings.Settings;
+import com.github.LastorderDC.josaformatter.KoreanUtils;
 
 /**
  *
@@ -29,8 +30,8 @@ public class PrefixCmd extends AdminCommand
     public PrefixCmd(Bot bot)
     {
         this.name = "prefix";
-        this.help = "sets a server-specific prefix";
-        this.arguments = "<prefix|NONE>";
+        this.help = "서버단위로 접두어를 설정합니다";
+        this.arguments = "<접두어|NONE>";
         this.aliases = bot.getConfig().getAliases(this.name);
     }
     
@@ -39,7 +40,7 @@ public class PrefixCmd extends AdminCommand
     {
         if(event.getArgs().isEmpty())
         {
-            event.replyError("Please include a prefix or NONE");
+            event.replyError("접두어나 NONE을 포함해야 합니다.");
             return;
         }
         
@@ -47,12 +48,14 @@ public class PrefixCmd extends AdminCommand
         if(event.getArgs().equalsIgnoreCase("none"))
         {
             s.setPrefix(null);
-            event.replySuccess("Prefix cleared.");
+            event.replySuccess("접두어를 비웠습니다.");
         }
         else
         {
             s.setPrefix(event.getArgs());
-            event.replySuccess("Custom prefix set to `" + event.getArgs() + "` on *" + event.getGuild().getName() + "*");
+            String josa = KoreanUtils.format("%s를",event.getArgs());
+            josa = Character.toString(josa.charAt(josa.length() - 1));
+            event.replySuccess("서버 *" + event.getGuild().getName() + "* 의 접두어를 `" + event.getArgs() + "`" + (josa.equals("을") ? "으로" : "로") + " 변경했습니다.");
         }
     }
 }

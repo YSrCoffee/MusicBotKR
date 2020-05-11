@@ -19,7 +19,8 @@ import com.jagrosh.jdautilities.command.CommandEvent;
 import com.jagrosh.jmusicbot.Bot;
 import com.jagrosh.jmusicbot.audio.AudioHandler;
 import com.jagrosh.jmusicbot.commands.DJCommand;
-import net.dv8tion.jda.api.entities.User;
+import net.dv8tion.jda.core.entities.User;
+import com.github.LastorderDC.josaformatter.KoreanUtils;
 
 /**
  *
@@ -31,7 +32,7 @@ public class ForceskipCmd extends DJCommand
     {
         super(bot);
         this.name = "forceskip";
-        this.help = "skips the current song";
+        this.help = "현재 재생중인 노래를 강제로 스킵합니다";
         this.aliases = bot.getConfig().getAliases(this.name);
         this.bePlaying = true;
     }
@@ -41,8 +42,10 @@ public class ForceskipCmd extends DJCommand
     {
         AudioHandler handler = (AudioHandler)event.getGuild().getAudioManager().getSendingHandler();
         User u = event.getJDA().getUserById(handler.getRequester());
-        event.reply(event.getClient().getSuccess()+" Skipped **"+handler.getPlayer().getPlayingTrack().getInfo().title
-                +"** (requested by "+(u==null ? "someone" : "**"+u.getName()+"**")+")");
+        String josa = KoreanUtils.format("%s를",handler.getPlayer().getPlayingTrack().getInfo().title);
+        josa = Character.toString(josa.charAt(josa.length() - 1));
+        event.reply(event.getClient().getSuccess()+" 노래 **"+handler.getPlayer().getPlayingTrack().getInfo().title
+                +"** " + josa + " 스킵했습니다 (신청자 "+(u==null ? "누군가" : "**"+u.getName()+"**")+")");
         handler.getPlayer().stopTrack();
     }
 }

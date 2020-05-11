@@ -80,8 +80,8 @@ public class JMusicBot
         Bot bot = new Bot(waiter, config, settings);
         
         AboutCommand aboutCommand = new AboutCommand(Color.BLUE.brighter(),
-                                "a music bot that is [easy to host yourself!](https://github.com/jagrosh/MusicBot) (v"+version+")",
-                                new String[]{"High-quality music playback", "FairQueue™ Technology", "Easy to host yourself"},
+                                "[스스로 설치하기 쉬운](https://github.com/Lastorder-DC/MusicBot)  음악 봇입니다!(v"+version+")",
+                                new String[]{"고음질 음악 재생", "FairQueue™ 기술", "스스로 설치하기 쉬움"},
                                 RECOMMENDED_PERMS);
         aboutCommand.setIsAuthor(false);
         aboutCommand.setReplacementCharacter("\uD83C\uDFB6"); // 🎶

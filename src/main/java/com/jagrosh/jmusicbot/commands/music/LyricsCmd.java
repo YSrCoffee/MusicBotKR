@@ -35,8 +35,8 @@ public class LyricsCmd extends MusicCommand
     {
         super(bot);
         this.name = "lyrics";
-        this.arguments = "[song name]";
-        this.help = "shows the lyrics to the currently-playing song";
+        this.arguments = "[노래 제목]";
+        this.help = "현재 재생중인 노래의 가사를 보여줍니다";
         this.aliases = bot.getConfig().getAliases(this.name);
         this.botPermissions = new Permission[]{Permission.MESSAGE_EMBED_LINKS};
         this.bePlaying = true;
@@ -55,7 +55,7 @@ public class LyricsCmd extends MusicCommand
         {
             if(lyrics == null)
             {
-                event.replyError("Lyrics for `" + title + "` could not be found!" + (event.getArgs().isEmpty() ? " Try entering the song name manually (`lyrics [song name]`)" : ""));
+                event.replyError("노래 `" + title + "` 의 가사를 찾을수 없습니다!" + (event.getArgs().isEmpty() ? " 노래 제목을 직접 입력해 보세요 (`lyrics [노래 이름]`)" : ""));
                 return;
             }
 
@@ -65,7 +65,7 @@ public class LyricsCmd extends MusicCommand
                     .setTitle(lyrics.getTitle(), lyrics.getURL());
             if(lyrics.getContent().length()>15000)
             {
-                event.replyWarning("Lyrics for `" + title + "` found but likely not correct: " + lyrics.getURL());
+                event.replyWarning("노래 `" + title + "` 의 가사를 찾았지만 아닐 가능성이 높습니다: " + lyrics.getURL());
             }
             else if(lyrics.getContent().length()>2000)
             {

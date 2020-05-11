@@ -19,6 +19,7 @@ import com.jagrosh.jdautilities.command.CommandEvent;
 import com.jagrosh.jmusicbot.Bot;
 import com.jagrosh.jmusicbot.audio.AudioHandler;
 import com.jagrosh.jmusicbot.commands.DJCommand;
+import com.github.LastorderDC.josaformatter.KoreanUtils;
 
 /**
  *
@@ -30,7 +31,7 @@ public class SkiptoCmd extends DJCommand
     {
         super(bot);
         this.name = "skipto";
-        this.help = "skips to the specified song";
+        this.help = "특정 노래로 스킵합니다";
         this.arguments = "<position>";
         this.aliases = bot.getConfig().getAliases(this.name);
         this.bePlaying = true;
@@ -46,17 +47,19 @@ public class SkiptoCmd extends DJCommand
         }
         catch(NumberFormatException e)
         {
-            event.reply(event.getClient().getError()+" `"+event.getArgs()+"` is not a valid integer!");
+            event.reply(KoreanUtils.format(event.getClient().getError()+" `%s`는 올바른 숫자가 아닙니다!",event.getArgs()));
             return;
         }
         AudioHandler handler = (AudioHandler)event.getGuild().getAudioManager().getSendingHandler();
         if(index<1 || index>handler.getQueue().size())
         {
-            event.reply(event.getClient().getError()+" Position must be a valid integer between 1 and "+handler.getQueue().size()+"!");
+            event.reply(event.getClient().getError()+" 위치는 1과 "+handler.getQueue().size()+" 사이 정수여야 합니다!");
             return;
         }
         handler.getQueue().skip(index-1);
-        event.reply(event.getClient().getSuccess()+" Skipped to **"+handler.getQueue().get(0).getTrack().getInfo().title+"**");
+        String josa = KoreanUtils.format("%s를",handler.getQueue().get(0).getTrack().getInfo().title);
+        josa = Character.toString(josa.charAt(josa.length() - 1));
+        event.reply(event.getClient().getSuccess()+" 노래 **"+handler.getQueue().get(0).getTrack().getInfo().title+"**" + (josa.equals("을") ? "으로" : "로") + " 스킵합니다.");
         handler.getPlayer().stopTrack();
     }
 }
