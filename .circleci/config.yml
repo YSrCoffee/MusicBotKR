@@ -38,4 +38,8 @@ jobs:
           key: v1-dependencies-{{ checksum "pom.xml" }}
 
       # run tests!
-      - run: mvn integration-test
+      - run: mvn integration-test && mv ./target/JMusicBot-*-All.jar ./JMusicBot-All.jar
+      
+      - store_artifacts:
+          path: ~/repo/JMusicBot-All.jar
+          destination: JMusicBot-All.jar
