@@ -36,10 +36,10 @@ import org.json.JSONTokener;
  */
 public class OtherUtil
 {
-    public final static String NEW_VERSION_AVAILABLE = "There is a new version of JMusicBot available!\n"
-                    + "Current version: %s\n"
-                    + "New Version: %s\n\n"
-                    + "Please visit https://github.com/jagrosh/MusicBot/releases/latest to get the latest release.";
+    public final static String NEW_VERSION_AVAILABLE = "JMusicBot-KR의 최신 버전을 사용할 수 있습니다!\n"
+                    + "현재 버전: %s\n"
+                    + "최신 버전: %s\n\n"
+                    + "https://github.com/Lastorder-DC/MusicBot/releases/latest에서 최신 버전을 받으실 수 있습니다.";
     private final static String WINDOWS_INVALID_PATH = "c:\\windows\\system32\\";
     
     /**
@@ -100,7 +100,7 @@ public class OtherUtil
         {
             URL u = new URL(url);
             URLConnection urlConnection = u.openConnection();
-            urlConnection.setRequestProperty("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.112 Safari/537.36");
+            urlConnection.setRequestProperty("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.114 Safari/537.36");
             return urlConnection.getInputStream();
         }
         catch(IOException | IllegalArgumentException ignore) {}
@@ -180,7 +180,7 @@ public class OtherUtil
         try
         {
             Response response = new OkHttpClient.Builder().build()
-                    .newCall(new Request.Builder().get().url("https://api.github.com/repos/jagrosh/MusicBot/releases/latest").build())
+                    .newCall(new Request.Builder().get().url("https://api.github.com/repos/Lastorder-DC/MusicBot/releases/latest").build())
                     .execute();
             ResponseBody body = response.body();
             if(body != null)
