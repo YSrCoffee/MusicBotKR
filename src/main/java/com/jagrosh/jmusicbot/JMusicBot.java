@@ -59,14 +59,14 @@ public class JMusicBot
         Logger log = LoggerFactory.getLogger("Startup");
         
         // create prompt to handle startup
-        Prompt prompt = new Prompt("JMusicBot", "Switching to nogui mode. You can manually start in nogui mode by including the -Dnogui=true flag.");
+        Prompt prompt = new Prompt("JMusicBot-KR", "nogui 모드로 전환합니다. -Dnogui=true 플래그를 포함해서 시작하면 수동으로 nogui 모드로 시작하실수 있습니다.");
         
         // get and check latest version
         String version = OtherUtil.checkVersion(prompt);
         
         // check for valid java version
         if(!System.getProperty("java.vm.name").contains("64"))
-            prompt.alert(Prompt.Level.WARNING, "Java Version", "It appears that you may not be using a supported Java version. Please use 64-bit java.");
+            prompt.alert(Prompt.Level.WARNING, "자바 버전", "지원되지 않는 자바 버전을 사용하고 있는 것 같습니다. 64비트 자바를 이용해 주세요.");
         
         // load config
         BotConfig config = new BotConfig(prompt);
@@ -159,9 +159,9 @@ public class JMusicBot
             } 
             catch(Exception e) 
             {
-                log.error("Could not start GUI. If you are "
-                        + "running on a server or in a location where you cannot display a "
-                        + "window, please run in nogui mode using the -Dnogui=true flag.");
+                log.error("GUI를 시작할 수 없습니다. 만약 서버에서 실행중이거나 디스플레이를 사용"
+                        + "할 수 없는 환경에서 실행하고 있다면, -Dnogui=true 플래그를 사용해 GUI"
+                        + "를 사용하지 않는 모드로 시작할 수 있습니다.");
             }
         }
         
@@ -183,15 +183,15 @@ public class JMusicBot
         }
         catch (LoginException ex)
         {
-            prompt.alert(Prompt.Level.ERROR, "JMusicBot", ex + "\nPlease make sure you are "
-                    + "editing the correct config.txt file, and that you have used the "
-                    + "correct token (not the 'secret'!)\nConfig Location: " + config.getConfigLocation());
+            prompt.alert(Prompt.Level.ERROR, "JMusicBot-KR", ex + "\n올바른 config.txt 파일을 수정한"
+                    + "것인지, 올바른 토큰 값이 입력되어 있는지 확인해 주세요."
+                    + "\n설정 파일 위치: " + config.getConfigLocation());
             System.exit(1);
         }
         catch(IllegalArgumentException ex)
         {
-            prompt.alert(Prompt.Level.ERROR, "JMusicBot", "Some aspect of the configuration is "
-                    + "invalid: " + ex + "\nConfig Location: " + config.getConfigLocation());
+            prompt.alert(Prompt.Level.ERROR, "JMusicBot-KR", "설정 파일의 일부분이 잘못되었습니다:"
+                    + ex + "\n설정 파일 위치: " + config.getConfigLocation());
             System.exit(1);
         }
     }
