@@ -221,7 +221,7 @@ public class PlayCmd extends MusicCommand
             this.name = "playlist";
             this.aliases = new String[]{"pl"};
             this.arguments = "<name>";
-            this.help = "plays the provided playlist";
+            this.help = "지정한 재생목록을 재생합니다";
             this.beListening = true;
             this.bePlaying = false;
         }
