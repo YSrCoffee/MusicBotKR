@@ -30,7 +30,7 @@ public class PrefixCmd extends AdminCommand
     public PrefixCmd(Bot bot)
     {
         this.name = "prefix";
-        this.help = "서버단위로 접두어를 설정합니다";
+        this.help = "defina um prefixo específico para o servidor!";
         this.arguments = "<접두어|NONE>";
         this.aliases = bot.getConfig().getAliases(this.name);
     }
